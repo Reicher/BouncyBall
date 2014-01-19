@@ -2,7 +2,7 @@
 May or may not work in firefox and older ie broswers
 */
 
-
+// YUK, not my work
 var dotLineLength = function(x, y, x0, y0, x1, y1, o) {
   function lineLength(x, y, x0, y0){
     return Math.sqrt((x -= x0) * x + (y -= y0) * y);
@@ -175,6 +175,7 @@ function updateMouseWheel(event)
 }
 
 var c=document.getElementById("myCanvas");
+document.body.style.overflowY = "hidden";​
 var ctx=c.getContext("2d");
 
 var myBall = new Ball();
