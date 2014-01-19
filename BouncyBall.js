@@ -161,9 +161,14 @@ function Draw(){
 	myBall.Draw();
 }
 
+
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+
+
 function updateMousePos(event)
 {
-	myWall.moveTo([event.x, event.y -50]);
+	myWall.moveTo([ event.offsetX, event.offsetY]);
 }
 
 function updateMouseWheel(event)
@@ -173,9 +178,6 @@ function updateMouseWheel(event)
 
 	myWall.rotate();
 }
-
-var c=document.getElementById("myCanvas");
-var ctx=c.getContext("2d");
 
 var myBall = new Ball();
 var myWall = new Wall( [350, 550], [450, 550] );
