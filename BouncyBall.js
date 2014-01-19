@@ -20,6 +20,12 @@ var dotLineLength = function(x, y, x0, y0, x1, y1, o) {
   }
 };
 
+function dotproduct(a,b) {
+	var n = 0, lim = Math.min(a.length,b.length);
+	for (var i = 0; i < lim; i++) n += a[i] * b[i];
+	return n;
+};
+
 function Wall (p1x, p1y, p2x, p2y) {
 	this.p1 =  new Array();
 	this.p2 =  new Array();
@@ -39,53 +45,60 @@ function Wall (p1x, p1y, p2x, p2y) {
 }
 
 function Ball () {
-	this.x = 50;
-	this.y = 100;
-	this.vx = 70;
-	this.vy = 0;
+	this.pos = new Array(400, 200);
+	this.vel = new Array(70, 50);
 	this.size = 50;
 	this.bouncy = 0.75;
 	
 	this.Draw = function () {
 		ctx.beginPath();
-		ctx.arc(this.x, this.y, this.size, 0, Math.PI*2, true);  // Cool
+		ctx.arc(this.pos[0], this.pos[1], this.size, 0, Math.PI*2, true);  // Cool
 		ctx.closePath();
 		ctx.stroke();
 	};
     	
 	this.Update = function () {
-		this.x += this.vx * dt;
-		this.y += this.vy * dt;
+		this.pos[0] += this.vel[0] * dt;
+		this.pos[1] += this.vel[1] * dt;
 		this.Gravity();
 	};
 	
 	this.Gravity = function ()
 	{
-		gravConst = 80;
-		this.vy += gravConst * dt;
+		gravConst = 110;
+		this.vel[1] += gravConst * dt;
 	};
 	
 	this.CheckForCollision = function (wall) {
-		if( dotLineLength(this.x, this.y, wall.p1x, wall.p1y, wall.p2x, wall.p2y, true) < this.size + 1){
+		if( dotLineLength(this.pos[0], this.pos[1], wall.p1x, wall.p1y, wall.p2x, wall.p2y, true) < this.size + 1){
 			dx = wall.p2x - wall.p1x;
 			dy = wall.p2y - wall.p1y;
 			
-			nx = dy;
-			ny = -dx;
+			var normal1 = new Array(dy, -dx);
+			var normal2 = new Array(-dy, dx);
 			
 			// Normalize normals:)
-			nx = dy == 0 ? 0 : nx / dy;
-			ny = dx == 0 ? 0 : ny / dx;
+			length = Math.sqrt( Math.pow(normal1[0], 2) + Math.pow(normal1[1], 2));
+			normal1[0] =  normal1[0]/length;
+			normal1[1] =  normal1[1]/length;
 
-			this.vx = (this.vx - 2 * (nx * this.vx) * nx) * this.bouncy;
-			this.vy = (this.vy - 2 * (ny * this.vy) * ny) * this.bouncy;
+			length = Math.sqrt( Math.pow(normal2[0], 2) + Math.pow(normal2[1], 2));
+			normal2[0] =  normal2[0]/length;
+			normal2[1] =  normal2[1]/length;
+
+			var tmp = dotproduct( normal2, this.vel );
+			this.vel[0] = this.vel[0] - 2 * tmp * normal2[0]; // * this.bouncy;
+			this.vel[1] = this.vel[1] - 2 * tmp * normal2[1]; // * this.bouncy;
+
 		}
 	};
 }
 
 function Update() {
-	myBall.CheckForCollision(aWall);
-	myBall.CheckForCollision(anotherWall);
+	for (var i = 0; i < walls.length; i++)
+		myBall.CheckForCollision(walls[i]);
+	
+
 	myBall.Update(dt);
 };
 
@@ -101,8 +114,9 @@ function Draw(){
 	ctx.stroke();
 
 	// Wall
-	aWall.Draw();
-	anotherWall.Draw();
+	for (var i = 0; i < walls.length; i++)
+		walls[i].Draw();
+	
 
 	// Ball
 	myBall.Draw();
@@ -110,9 +124,9 @@ function Draw(){
 }
 
 var myBall = new Ball();
-
-var aWall = new Wall(50, 500, 700, 500);
-var anotherWall = new Wall(700, 500, 800, 300);
+var walls = [	new Wall(50, 500, 700, 500), 
+		new Wall(700, 0, 650, 600), 
+		new Wall(100, 100, 300, 600)];
 
 // Start the game loop
 fps = 30;
