@@ -175,7 +175,6 @@ function updateMouseWheel(event)
 }
 
 var c=document.getElementById("myCanvas");
-document.body.style.overflowY = "hidden";​
 var ctx=c.getContext("2d");
 
 var myBall = new Ball();
