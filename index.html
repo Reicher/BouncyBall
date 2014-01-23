@@ -5,7 +5,22 @@
 <canvas id="myCanvas" width="800" height="600" style="border:1px solid #d3d3d3;">
 Your browser does not support the HTML5 canvas tag.</canvas>
 
-<SCRIPT SRC="BouncyBall.js"></SCRIPT>
+<SCRIPT>
+	function addJavascript(jsname,pos) {
+		var th = document.getElementsByTagName(pos)[0];
+		var s = document.createElement('script');
+		s.setAttribute('type','text/javascript');
+		s.setAttribute('src',jsname);
+		th.appendChild(s);
+	}
+	
+	addJavascript('HelpFunc.js','body');
+	addJavascript('Wall.js','body');
+	addJavascript('Ball.js','body');
+	addJavascript('BouncyBall.js','body');
+</SCRIPT>
+
+
 
 </body>
 </html>
