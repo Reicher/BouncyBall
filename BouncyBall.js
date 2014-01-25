@@ -48,7 +48,7 @@ var ctx=c.getContext("2d");
 var myBall = new Ball();
 var myWall = new Wall( [350, 550], [450, 550] );
 var walls = [	new Wall( [50, 500],  [700, 550] ), 
-		new Wall( [700, 0],   [650, 600] ), 
+		new Wall( [550, 300],   [650, 600] ), 
 		new Wall( [100, 100], [100, 600] )];
 
 // Start the game loop
