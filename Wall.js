@@ -14,7 +14,7 @@ function Wall (p1, p2) {
 		ctx.moveTo(this.p1[0], this.p1[1]);
 		ctx.lineTo(this.p2[0], this.p2[1]);
 		ctx.closePath();
-	        ctx.lineWidth = 10;
+	        ctx.lineWidth = 4;
 		ctx.stroke();
 	};
 

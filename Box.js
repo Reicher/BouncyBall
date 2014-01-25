@@ -4,6 +4,8 @@ function Box(pos, size) {
 	this.bottom 	= new Wall( [pos[0]+size[0], pos[1]+size[1]], [pos[0], pos[1]+size[1]] );
 	this.left 	= new Wall( [pos[0], pos[1]+size[1]], pos   );
 
+	this.removeMe = false;
+
 	this.draw = function () {
 		this.top.draw();
 		this.right.draw();

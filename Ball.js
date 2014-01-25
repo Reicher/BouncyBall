@@ -26,6 +26,14 @@ function Ball (pos, vel) {
 		gravConst = 160;
 		this.vel[1] += gravConst * dt;
 	};
+
+	this.CheckForBoxCollision = function (box){
+		if(    this.CheckForCollision(box.top) 
+		    || this.CheckForCollision(box.right)
+		    || this.CheckForCollision(box.bottom)
+		    || this.CheckForCollision(box.left) )
+			box.removeMe = true;
+	};
 	
 	this.CheckForCollision = function (wall) {
 		// Distance between ball and the wall
@@ -58,6 +66,8 @@ function Ball (pos, vel) {
 			var tmp = dotproduct( normal, this.vel );
 			this.vel[0] = this.vel[0] - 2 * tmp * normal[0] * this.bouncy;
 			this.vel[1] = this.vel[1] - 2 * tmp * normal[1] * this.bouncy;
+			return true;
 		}
+		return false;
 	};
 }
