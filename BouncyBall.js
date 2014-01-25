@@ -4,14 +4,14 @@ May or may not work in firefox and older ie broswers
 
 function Update() {
 	myBall.CheckForCollision(myWall);
-	for (var i = 0; i < walls.length; i++)
-		myBall.CheckForCollision(walls[i]);
+	for (var i = 0; i < level.walls.length; i++)
+		myBall.CheckForCollision(level.walls[i]);
 
-	for (var i = 0; i < boxes.length; i++){
-		myBall.CheckForCollision(boxes[i].top);
-		myBall.CheckForCollision(boxes[i].right);
-		myBall.CheckForCollision(boxes[i].bottom);
-		myBall.CheckForCollision(boxes[i].left);
+	for (var i = 0; i < level.boxes.length; i++){
+		myBall.CheckForCollision(level.boxes[i].top);
+		myBall.CheckForCollision(level.boxes[i].right);
+		myBall.CheckForCollision(level.boxes[i].bottom);
+		myBall.CheckForCollision(level.boxes[i].left);
 	}
 	
 	myBall.Update(dt);
@@ -21,21 +21,14 @@ function Draw(){
 	// Clean screen
 	ctx.clearRect(0, 0, c.width, c.height);
 
-	// Border
-	ctx.beginPath();
-	ctx.lineWidth="3";
-	ctx.strokeStyle="black";
-	ctx.rect(0,0, c.width, c.height);
-	ctx.stroke();
-
 	// Wall
 	myWall.draw();
-	for (var i = 0; i < walls.length; i++)
-		walls[i].draw();
+	for (var i = 0; i < level.walls.length; i++)
+		level.walls[i].draw();
 
 	// Boxes
-	for (var i = 0; i < boxes.length; i++)
-		boxes[i].draw();
+	for (var i = 0; i < level.boxes.length; i++)
+		level.boxes[i].draw();
 	
 	// Ball
 	myBall.Draw();
@@ -57,17 +50,13 @@ function updateMouseWheel(event)
 var c=document.getElementById("myCanvas");
 var ctx=c.getContext("2d");
 
-var myBall = new Ball();
+var myBall = new Ball([300, 400], [0, 150]);
 var myWall = new Wall( [350, 550], [450, 550] );
-var walls = [	new Wall( [50, 500],  [700, 550] ), 
-		new Wall( [650, 300],   [650, 600] ), 
-		new Wall( [100, 100], [100, 600] )];
 
-var boxes = [new Box([200, 200], [100, 50])];
-
+var level = new Level1();
 
 // Start the game loop
-fps = 40;
+fps = 30;
 interval = 1000 / fps;
 dt = 1 / interval;
 
