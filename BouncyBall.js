@@ -23,7 +23,7 @@ function Draw(){
 
 function updateMousePos(event)
 {
-	myWall.moveTo([ event.offsetX, 650]);
+	myWall.moveTo([ event.offsetX, 750]);
 }
 
 function updateMouseWheel(event)

@@ -60,8 +60,8 @@ function Ball (pos, vel) {
 
 			// Move object out of floor=/
 			var intoFloor = dist - this.size;
-			this.pos[0] -= normal[0] * intoFloor;
-			this.pos[1] -= normal[1] * intoFloor;
+			//this.pos[0] -= normal[0] * intoFloor;
+			//this.pos[1] -= normal[1] * intoFloor;
 
 			var tmp = dotproduct( normal, this.vel );
 			this.vel[0] = this.vel[0] - 2 * tmp * normal[0] * this.bouncy;
