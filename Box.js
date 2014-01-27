@@ -1,4 +1,7 @@
 function Box(pos, size) {
+	this.pos = pos;
+	this.size = size;
+	
 	this.top 	= new Wall( pos, [pos[0]+size[0], pos[1]]); 
 	this.right 	= new Wall( [pos[0]+size[0], pos[1]], [pos[0]+size[0], pos[1]+size[1]]  );
 	this.bottom 	= new Wall( [pos[0]+size[0], pos[1]+size[1]], [pos[0], pos[1]+size[1]] );
@@ -30,11 +33,14 @@ function Box(pos, size) {
 			
 	};
 
-	this.draw = function () {
-		this.top.draw();
-		this.right.draw();
-		this.bottom.draw();
-		this.left.draw();
+	this.draw = function () {		
+	ctx.beginPath();
+	ctx.rect(this.pos[0],this.pos[1], this.size[0], this.size[1]);
+	ctx.fillStyle = 'yellow';
+	ctx.fill();
+	ctx.lineWidth = 7;
+	ctx.strokeStyle = 'black';
+	ctx.stroke();
 	};
 }
 

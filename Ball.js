@@ -8,11 +8,15 @@ function Ball (pos, vel) {
 	this.size = 20;
 	this.bouncy = 1.0;
 	
+	this.pic = new Image();
+	this.pic.src = "images/ball1.png";
+	
 	this.Draw = function () {
-		ctx.beginPath();
-		ctx.arc(this.pos[0], this.pos[1], this.size, 0, Math.PI*2, true);  // Cool
-		ctx.closePath();
-		ctx.stroke();
+		ctx.drawImage(	this.pic, 
+						(this.pos[0] - this.size), 
+						(this.pos[1] - this.size), 
+						this.size*2, 
+						this.size*2);
 	};
     	
 	this.Update = function () {

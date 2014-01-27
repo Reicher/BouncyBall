@@ -9,8 +9,8 @@ function Update() {
 };
 
 function Draw(){
-	// Clean screen
-	ctx.clearRect(0, 0, c.width, c.height);
+	// Draw background
+	ctx.drawImage(background,0, 0, c.width, c.height);
 
 	drawLevel(currentLevel);
 
@@ -36,6 +36,8 @@ function updateMouseWheel(event)
 
 var c=document.getElementById("myCanvas");
 var ctx=c.getContext("2d");
+background = new Image();
+background.src = "images/space.jpg";
 
 var myBall = new Ball([300, 400], [0, 30]);
 var myWall = new Wall( [350, 550], [450, 550] );
