@@ -23,10 +23,11 @@ function updateLevel(level, ball){
 	}
 
 	for (var i = 0; i < level.walls.length; i++)
-		ball.CheckForCollision(level.walls[i]);
+		level.walls[i].CheckForCollision(ball);
 
 	for (var i = 0; i < level.boxes.length; i++){
-		ball.CheckForBoxCollision(level.boxes[i]);
+		if(level.boxes[i].CheckForBoxCollision(ball))
+			break;
 
 		if(level.boxes[i].removeMe)
 			level.boxes.splice(i, 1);

@@ -3,7 +3,7 @@ May or may not work in firefox and older ie broswers
 */
 
 function Update() {
-	myBall.CheckForCollision(myWall);
+	myWall.CheckForCollision(myBall);
 	updateLevel(currentLevel, myBall);
 	myBall.Update(dt);
 };
