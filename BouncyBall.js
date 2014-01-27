@@ -3,9 +3,11 @@ May or may not work in firefox and older ie broswers
 */
 
 function Update() {
-	myWall.CheckForCollision(myBall);
-	updateLevel(currentLevel, myBall);
-	myBall.Update(dt);
+	
+	for (var i = 0; i < currentLevel.myBalls.length; i++)
+		myWall.CheckForCollision(currentLevel.myBalls[i]);
+		
+	updateLevel(currentLevel);
 };
 
 function Draw(){
@@ -17,8 +19,6 @@ function Draw(){
 	// Wall
 	myWall.draw();
 
-	// Ball
-	myBall.Draw();
 }
 
 function updateMousePos(event)
@@ -39,9 +39,10 @@ var ctx=c.getContext("2d");
 background = new Image();
 background.src = "images/space.jpg";
 
-var myBall = new Ball([300, 400], [0, 30]);
-var myWall = new Wall( [350, 550], [450, 550] );
-var currentLevel = new Level1();
+var myWall = new Wall( [250, 750], [350, 750] );
+var levels = [ new Level1(), new Level2()];
+var levelNr = 0;
+var currentLevel = levels[levelNr];
 
 // Start the game loop
 fps = 40;

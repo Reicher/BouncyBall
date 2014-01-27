@@ -2,10 +2,10 @@
 May or may not work in firefox and older ie broswers
 */
 
-function Ball (pos, vel) {
+function Ball (pos, vel, size) {
 	this.pos = pos;
 	this.vel = vel;
-	this.size = 20;
+	this.size = size;
 	this.bouncy = 1.0;
 	
 	this.pic = new Image();
