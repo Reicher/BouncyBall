@@ -35,12 +35,13 @@ function updateLevel(level){
 
 	if(level.boxes.length == 0){
 		level.completed = true;
-		alert("You won!");
 		
 		if(levels.length > levelNr+1){
 			levelNr++;
 			currentLevel = levels[levelNr];
 		}
+		else
+			alert("You won!");
 	}
 	else if(level.myBalls.length == 1 && level.myBalls[0].pos[1] > 800+level.ballSize){
 		level.gameOver = true;
