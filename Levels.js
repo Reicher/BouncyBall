@@ -111,6 +111,31 @@ function Level2() {
 			this.boxes[this.boxes.length] = new Box([x, y], [boxWidth, boxHeight]);
 }
 
+function Level3() {
+	this.walls = [	new Wall( [0, 0],  [600, 0] ), 
+					new Wall( [0, 0],   [0, 800] ), 
+					new Wall( [580, 0], [600, 800]), 
+					new Wall( [100, 600], [500, 600]),
+					new Wall( [100, 600], [300, 400]),
+					new Wall( [300, 400], [500, 600])];
+			
+	this.ballSize = 20;
+	this.myBalls = [ new Ball([50, 300], [0, 30], this.ballSize) ];
+	
+	this.gameOver = false;
+	this.completed = false;
+	
+	this.textShownFor = 0;
+	this.levelText = "Level 3";
+	this.levelTagline = "Buggy as fuck!";
 
+	boxWidth = 50;
+	boxHeight = 25;	
+	this.boxes = [];
+	for(var x = 200; x <= 400; x+=50)
+		for(var y = 100; y <= 125; y+=25)
+			if(x != 300)
+				this.boxes[this.boxes.length] = new Box([x, y], [boxWidth, boxHeight]);
+}
 
 

@@ -40,7 +40,7 @@ background = new Image();
 background.src = "images/space.jpg";
 
 var myWall = new Wall( [250, 750], [350, 750] );
-var levels = [ new Level1(), new Level2()];
+var levels = [ new Level1(), new Level2(), Level3];
 var levelNr = 0;
 var currentLevel = levels[levelNr];
 
