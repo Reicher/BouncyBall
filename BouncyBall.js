@@ -77,7 +77,7 @@ function drawSplash(){
 
 function init(){
 	myWall = new Wall( [250, 750], [350, 750] );
-	levels = [ new Level1(), new Level2(), Level3(), Level4()];
+	levels = [ new Level1(), new Level2(), new Level3(), new Level4()];
  	levelNr = 0;
 	currentLevel = levels[levelNr];
 	GameOn = false;
