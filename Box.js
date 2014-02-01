@@ -36,10 +36,10 @@ function Box(pos, size) {
 	this.draw = function () {		
 		ctx.beginPath();
 		ctx.rect(this.pos[0],this.pos[1], this.size[0], this.size[1]);
-		ctx.fillStyle = 'yellow';
+		ctx.fillStyle = 'green';
 		ctx.fill();
 		ctx.lineWidth = 7;
-		ctx.strokeStyle = 'black';
+		ctx.strokeStyle = 'gold';
 		ctx.stroke();
 	};
 }

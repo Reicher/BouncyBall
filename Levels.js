@@ -1,5 +1,17 @@
 function drawLevel(level){
-	
+	// Walls
+	for (var i = 0; i < level.walls.length; i++)
+		level.walls[i].draw();
+
+	// Boxes
+	for (var i = 0; i < level.boxes.length; i++)
+		level.boxes[i].draw();
+		
+	// Balls
+	for (var i = 0; i < level.myBalls.length; i++)
+		level.myBalls[i].Draw();
+		
+	// start of level
 	if(level.textShownFor < 20){
 		ctx.font="60px Georgia";
 		ctx.fillStyle="white"
@@ -17,18 +29,6 @@ function drawLevel(level){
 		ctx.font="40px Georgia";
 		ctx.fillText("Click to start!",200,600, 200);
 	}
-	
-	// Walls
-	for (var i = 0; i < level.walls.length; i++)
-		level.walls[i].draw();
-
-	// Boxes
-	for (var i = 0; i < level.boxes.length; i++)
-		level.boxes[i].draw();
-		
-	// Balls
-	for (var i = 0; i < level.myBalls.length; i++)
-		level.myBalls[i].Draw();
 };
 
 function updateLevel(level){
@@ -54,7 +54,8 @@ function updateLevel(level){
 
 	for (var ball = 0; ball < level.myBalls.length; ball++){
 		for (var i = 0; i < level.walls.length; i++)
-			level.walls[i].CheckForCollision(level.myBalls[ball]);
+			if(level.walls[i].CheckForCollision(level.myBalls[ball]))
+				break;
 	
 		for (var i = 0; i < level.boxes.length; i++){
 			if(level.boxes[i].CheckForBoxCollision(level.myBalls[ball]))
@@ -70,9 +71,9 @@ function updateLevel(level){
 
 ////////////////////////// LEVELS ///////////////////////////////////////////
 function Level1() {
-	this.walls = [	new Wall( [200, 20],  [400, 20] ), 
-			new Wall( [200, 20],   [0, 800] ), 
-			new Wall( [400, 20], [600, 800] )];
+	this.walls = [	new Wall( [20, 20],  [580, 20] ), 
+			new Wall( [20, 20],   [0, 600] ), 
+			new Wall( [580, 20], [600, 800] )];
 			
 	this.ballSize = 20;
 	this.myBalls = [ new Ball([300, 420], [0, 40], this.ballSize) ];
@@ -141,4 +142,37 @@ function Level3() {
 				this.boxes[this.boxes.length] = new Box([x, y], [boxWidth, boxHeight]);
 }
 
+function Level4() {
+	this.walls = [	new Wall( [20, 20],  [580, 20] ), 
+					new Wall( [20, 20],   [0, 800] ), 
+					new Wall( [580, 20], [600, 800] ),
+					
+					new Wall( [200, 200], [400, 200]),
+					new Wall( [200, 200], [300, 300]),
+					new Wall( [300, 300], [400, 200]),
+					
+					new Wall( [50, 400], [250, 400]),
+					new Wall( [50, 400], [150, 500]),
+					new Wall( [150, 500], [250, 400]),
+					
+					new Wall( [350, 400], [550, 400]),
+					new Wall( [350, 400], [450, 500]),
+					new Wall( [450, 500], [550, 400])];
+			
+	this.ballSize = 20;
+	this.myBalls = [ new Ball([300, 420], [0, 70], this.ballSize) ];
+	
+	this.started = false;
+	
+	this.textShownFor = 0;
+	this.levelText = "Level 4";
+	this.levelTagline = "Needs faster ball! :O";
 
+	boxWidth = 50;
+	boxHeight = 25;	
+	this.boxes = [];
+	for(var x = 100; x <= 450; x+=50)
+		for(var y = 100; y <= 325; y+=25)
+			if(x != 300 && x != 250 && y != 175 && y != 200 && y != 225 && y != 250)
+				this.boxes[this.boxes.length] = new Box([x, y], [boxWidth, boxHeight]);
+}
