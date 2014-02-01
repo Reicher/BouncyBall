@@ -7,24 +7,12 @@ Move your game cursor by moving the mouse. Scroll to rotate.<br>
 <canvas id="myCanvas" width="600" height="800" style="border:1px solid #d3d3d3;">
 Your browser does not support the HTML5 canvas tag.</canvas>
 
-<SCRIPT>
-	function addJavascript(jsname,pos) {
-		var th = document.getElementsByTagName(pos)[0];
-		var s = document.createElement('script');
-		s.setAttribute('type','text/javascript');
-		s.setAttribute('src',jsname);
-		th.appendChild(s);
-	}
-	
-	addJavascript('HelpFunc.js','head');
-	addJavascript('Wall.js','head');
-	addJavascript('Box.js','head');
-	addJavascript('Ball.js','head');
-	addJavascript('Levels.js','head');
-	addJavascript('BouncyBall.js','body');
-</SCRIPT>
-
-
+<script defer src="HelpFunc.js"></script>
+<script defer src="Wall.js"></script>
+<script defer src="Box.js"></script>
+<script defer src="Ball.js"></script>
+<script defer src="Levels.js"></script>
+<script defer src="BouncyBall.js"></script>
 
 </body>
 </html>
