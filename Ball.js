@@ -7,6 +7,7 @@ function Ball (pos, vel, size) {
 	this.vel = vel;
 	this.size = size;
 	this.bouncy = 1.0;
+	this.intoFloor = [0, 0];
 	
 	this.pic = new Image();
 	this.pic.src = "images/ball1.png";
@@ -20,8 +21,9 @@ function Ball (pos, vel, size) {
 	};
     	
 	this.Update = function () {
-		this.pos[0] += this.vel[0] * dt;
-		this.pos[1] += this.vel[1] * dt;
+		this.pos[0] += (this.vel[0] * dt) + this.intoFloor[0];
+		this.pos[1] += (this.vel[1] * dt) + this.intoFloor[1];
+		this.intoFloor = [0, 0];
 		//this.Gravity();
 	};
 	

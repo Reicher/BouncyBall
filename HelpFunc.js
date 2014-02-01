@@ -46,3 +46,10 @@ function rotate_point( around, angle, point){
 function distance(p1, p2) {
 	return Math.sqrt( Math.pow( p1[0] - p2[0], 2) + Math.pow( p1[1] - p2[1], 2) );
 };
+
+function normalize(vector) {
+	length = Math.sqrt( Math.pow(vector[0], 2) + Math.pow(vector[1], 2));
+	vector[0] =  vector[0]/length;
+	vector[1] =  vector[1]/length;
+	return vector;
+};

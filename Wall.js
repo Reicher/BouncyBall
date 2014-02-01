@@ -6,6 +6,9 @@ May or may not work in firefox and older ie broswers
 function Wall (p1, p2) {
 	this.p1 =  p1;
 	this.p2 =  p2;
+	this.moveToPos = [0, 0];
+	this.vel = [0, 0];
+	this.maxVel = 40;
 
 	this.rotation = 0;
 	
@@ -28,8 +31,20 @@ function Wall (p1, p2) {
 	};
 
 	this.moveTo = function(pos){
-		this.p1 = [ pos[0] - 50, pos[1] ];
-		this.p2 = [ pos[0] + 50, pos[1] ];
+		this.moveToPos = pos;
+	};
+	
+	this.update = function(){
+		var mid = (this.p1[0] + this.p2[0])/2;
+		var diff = this.moveToPos[0] - mid;
+		var speed = Math.abs(diff) > this.maxVel ? this.maxVel : diff;
+		if(this.moveToPos[0] > mid) // move right
+			this.vel[0] = Math.abs(speed);
+		else
+			this.vel[0] = -Math.abs(speed);
+		
+		this.p1[0] += this.vel[0] * dt;
+		this.p2[0] += this.vel[0] * dt;
 
 		this.rotate();
 	};
@@ -56,20 +71,14 @@ function Wall (p1, p2) {
 				var normal = this.isLeft(ball.pos) ? new Array(-dy, dx) : new Array(dy, -dx);
 			}	
 
-			// Normalize normal:)
-			length = Math.sqrt( Math.pow(normal[0], 2) + Math.pow(normal[1], 2));
-			normal[0] =  normal[0]/length;
-			normal[1] =  normal[1]/length;
-
-			// Move object out of floor=/
-			// works really bad at times.
-			var intoFloor = dist - ball.size;
-			//ball.pos[0] -= normal[0] * intoFloor;
-			//ball.pos[1] -= normal[1] * intoFloor;
+			normal = normalize(normal);
+			
+			var overlap = ball.size - dist;
+			ball.intoFloor = [normal[0] * overlap, normal[1] * overlap];
 
 			var tmp = dotproduct( normal, ball.vel );
-			ball.vel[0] = ball.vel[0] - 2 * tmp * normal[0] * ball.bouncy;
-			ball.vel[1] = ball.vel[1] - 2 * tmp * normal[1] * ball.bouncy;
+			ball.vel[0] = (ball.vel[0] - 2 * tmp * normal[0]) * ball.bouncy;
+			ball.vel[1] = (ball.vel[1] - 2 * tmp * normal[1]) * ball.bouncy;
 			return true;
 		}
 		return false;
